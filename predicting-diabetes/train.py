@@ -10,16 +10,18 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn import preprocessing
+from datetime import datetime
+
 np.random.seed(16)
 
 def preprocess(df):
-    print('----------------------------------------------')
-    print("Before preprocessing")
-    print("Number of rows with 0 values for each variable")
+    # print('----------------------------------------------')
+    # print("Before preprocessing")
+    # print("Number of rows with 0 values for each variable")
     for col in df.columns:
         missing_rows = df.loc[df[col]==0].shape[0]
-        print(col + ": " + str(missing_rows))
-    print('----------------------------------------------')
+    #     print(col + ": " + str(missing_rows))
+    # print('----------------------------------------------')
 
     # Replace 0 values with the mean of the existing values
     df['Glucose'] = df['Glucose'].replace(0, np.nan)
@@ -33,13 +35,13 @@ def preprocess(df):
     df['Insulin'] = df['Insulin'].fillna(df['Insulin'].mean())
     df['BMI'] = df['BMI'].fillna(df['BMI'].mean())
 
-    print('----------------------------------------------')
-    print("After preprocessing")
-    print("Number of rows with 0 values for each variable")
+    # print('----------------------------------------------')
+    # print("After preprocessing")
+    # print("Number of rows with 0 values for each variable")
     for col in df.columns:
         missing_rows = df.loc[df[col]==0].shape[0]
-        print(col + ": " + str(missing_rows))
-    print('----------------------------------------------')
+        # print(col + ": " + str(missing_rows))
+    # print('----------------------------------------------')
 
     # Standardization
     df_scaled = preprocessing.scale(df)
@@ -49,8 +51,6 @@ def preprocess(df):
     
 
     return df
-
-
 
 df = pd.read_csv('diabetes.csv')
 
@@ -67,10 +67,20 @@ networkLayer = [8,32,16,1]
 
 feedForward = FeedForward(networkLayer, sigmoid)
 
-backpropagation = Backpropagation(feedForward,0.7,0.8, 0.1, 2)
+backpropagation = Backpropagation(feedForward,0.7,0.8, 0.05, 2000)
+
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S")
+print("Start Time =", current_time)
 
 backpropagation.initialise()
 result = backpropagation.train(train.values)
+
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S")
+print("End Time =", current_time)
+
+print("Training time {} minutes".format(backpropagation.getTrainingTime()/60))
 
 feedForward.save('./network.txt')
 
