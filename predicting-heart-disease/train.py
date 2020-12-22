@@ -16,23 +16,23 @@ from datetime import datetime
 from sklearn.preprocessing import MinMaxScaler
 
 data = pd.DataFrame()
-data = pd.read_csv('./heart_failure_clinical_records_dataset.csv')
+data = pd.read_csv('./heart.csv')
 
 data.dropna(axis=1, inplace=True)
 
 min_max_scaler = MinMaxScaler()
 
-data[["age", "anaemia", "creatinine_phosphokinase", "ejection_fraction", "platelets", "serum_creatinine", "serum_sodium", "time"]] = min_max_scaler.fit_transform(data[["age", "anaemia", "creatinine_phosphokinase", "ejection_fraction", "platelets", "serum_creatinine", "serum_sodium", "time"]])
+data[["age", "cp", "trestbps", "chol", "thalach", "oldpeak", "slope", "thal"]] = min_max_scaler.fit_transform(data[["age", "cp", "trestbps", "chol", "thalach", "oldpeak", "slope", "thal"]])
 
 train, test = train_test_split(data, test_size=0.2)
 
 sigmoid = Sigmoid()
 
-networkLayer = [12,24,12,1]
+networkLayer = [13,26,13,1]
 
 feedForward = FeedForward(networkLayer, sigmoid)
 
-backpropagation = Backpropagation(feedForward,0.7,0.8, 0.05, 2000)
+backpropagation = Backpropagation(feedForward,0.3,0.5, 0.01, 2000)
 
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
@@ -53,10 +53,10 @@ feedForward = FeedForward.load('./network.txt')
 
 totalCorrect = 0
 for num,row in enumerate(test.values):
-    feedForward.activate(row[:12])
+    feedForward.activate(row[:13])
     outputs = feedForward.getOutputs()
-    print("Expected: {}, Actual: {}".format(int(row[12]),round(outputs[0])))
-    if(int(row[12]) == int(round(outputs[0]))):
+    print("Expected: {}, Actual: {}".format(int(row[13]),round(outputs[0])))
+    if(int(row[13]) == int(round(outputs[0]))):
         totalCorrect = totalCorrect +1
     
 
