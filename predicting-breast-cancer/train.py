@@ -69,7 +69,7 @@ for num,row in enumerate(test.values):
     feedForward.activate(row[:30])
     outputs = feedForward.getOutputs()
     print("Expected: {}, Actual: {}".format(int(row[30]),round(outputs[0])))
-    if(int(row[8]) == int(round(outputs[0]))):
+    if(int(row[30]) == int(round(outputs[0]))):
         totalCorrect = totalCorrect +1
     
 
