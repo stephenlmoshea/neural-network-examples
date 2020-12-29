@@ -130,3 +130,5 @@ dmypy.json
 
 .vscode/
 predicting-taxi-fares/NYC_taxi.csv
+ecg-heartbeat-categorization/mitbih_test.csv
+ecg-heartbeat-categorization/mitbih_train.csv
