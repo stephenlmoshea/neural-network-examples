@@ -134,3 +134,4 @@ ecg-heartbeat-categorization/mitbih_test.csv
 ecg-heartbeat-categorization/mitbih_train.csv
 predicting-liver-disease/indian_liver_patient.csv
 predicting-parkinsons-disease/pd_speech_features.csv
+predicting-kidney-disease/kidney_disease.csv
