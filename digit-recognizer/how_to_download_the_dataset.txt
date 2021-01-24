@@ -1,6 +1,6 @@
 The dataset for this project is hosted by Kaggle. To download the necessary dataset for this project, please follow the instructions below.
 
-1. Go to https://www.kaggle.com/uciml/pima-indians-diabetes-database
+1. Go to https://www.kaggle.com/c/digit-recognizer/overview
 
 2. Click on the 'Download All' button
 
